@@ -1,37 +1,37 @@
-###Android �����淶�ĵ�
-###�ṹ�淶
+### Android 开发规范文档
+### 结构规范
 
-###����淶
-#### Java�����淶
-#####1.������
-������д+��Ŀ����+ģ�����ƣ�ȫ��������Сд��ĸ��
+### 代码规范
+#### Java命名规范
+##### 1.包命名
+域名反写+项目名称+模块名称，全部单词用小写字母。
 ``` java
 me.keeganlee.kandroid.model
 ```
-#####2.��ͽӿ�����
-ʹ�ô��շ���������ʻ����ʴ���������ÿ�����ʵ�����ĸ��д��
-- activity�࣬������ActivityΪ��׺���磺LoginActivity
-- fragment�࣬������FragmentΪ��׺����:ShareDialogFragment
-- service�࣬������ServiceΪ��׺���磺DownloadService
-- adapter�࣬������AdapterΪ��׺���磺CouponListAdapter
-- �����࣬������UtilΪ��׺���磺EncryptUtil
-- ģ���࣬������BOΪ��׺���磺CouponBO
-- �ӿ�ʵ���࣬������ImplΪ��׺���磺ApiImpl
-#####3.��������
-ʹ��С�շ�����ö�����������һ�����ʵ�����ĸСд���������ʵ�����ĸ��д��
-- ��ʼ��������������init��ͷ������initView
-- ���÷�����������set��ͷ������setData
-- ���з���ֵ�Ļ�ȡ������������get��ͷ������getData
-- ����������أ�ʹ��saveΪǰ׺��ʶ���磺saveData();
-- ���������õģ�ʹ��resetǰ׺��ʶ���磺resetData();
-- ���������أ�ʹ��clearǰ׺��ʶ���磺clearData();
-- �������ݻ�Ч����صģ�ʹ��drawǰ׺��ʶ���磺drawCircle();
-- �����͵��жϷ�����������is��has��������߼�����ĵ�����equals������isEmpty()
-#####4.��������������
-- �ǹ����ҷǾ�̬�ֶε������� m ��ͷ��
-- ��̬�ֶε������� s ��ͷ��
-- �����ֶ���Сд��ĸ��ͷ��
-- ������̬` final `�ֶΣ�������Ϊȫ����д�����»������� (ALL_CAPS_WITH_UNDERSCORES)��
+##### 2.类和接口命名
+使用大驼峰规则，用名词或名词词组命名，每个单词的首字母大写。
+- activity类，命名以Activity为后缀，如：LoginActivity
+- fragment类，命名以Fragment为后缀，如:ShareDialogFragment
+- service类，命名以Service为后缀，如：DownloadService
+- adapter类，命名以Adapter为后缀，如：CouponListAdapter
+- 工具类，命名以Util为后缀，如：EncryptUtil
+- 模型类，命名以BO为后缀，如：CouponBO
+- 接口实现类，命名以Impl为后缀，如：ApiImpl
+##### 3.方法命名
+使用小驼峰规则，用动词命名，第一个单词的首字母小写，其他单词的首字母大写。
+- 初始化方法，命名以init开头，例：initView
+- 设置方法，命名以set开头，例：setData
+- 具有返回值的获取方法，命名以get开头，例：getData
+- 保存数据相关，使用save为前缀标识，如：saveData();
+- 对数据重置的，使用reset前缀标识，如：resetData();
+- 清除数据相关，使用clear前缀标识，如：clearData();
+- 绘制数据或效果相关的，使用draw前缀标识，如：drawCircle();
+- 布尔型的判断方法，命名以is或has，或具有逻辑意义的单词如equals，例：isEmpty()
+##### 4.变量及常量命名
+- 非公开且非静态字段的名称以 m 开头。
+- 静态字段的名称以 s 开头。
+- 其他字段以小写字母开头。
+- 公开静态` final `字段（常量）为全部大写并用下划线连接 (ALL_CAPS_WITH_UNDERSCORES)。
 ``` java
 public class MyClass {
     public static final int SOME_CONSTANT = 42;
@@ -42,13 +42,13 @@ public class MyClass {
     protected int mProtected;
 }
 ```
-#####5.�ؼ�id����
-�ؼ���д _ ��Χ _ ���壬��Χ��ѡ��ֻ������ȷ����ķ�Χ�ڲ���Ҫ���ϡ�
+##### 5.控件id命名
+控件缩写 _ 范围 _ 意义，范围可选，只在有明确定义的范围内才需要加上。
 
-�ؼ���д
+控件缩写
 
-| �ؼ�       |��д      |�ؼ�        |��д      |
-| :-------- | --------:| :-------- |
+| 控件       |缩写      |控件        |缩写      |
+|:--------  |:--------| :--------  |
 |TextView	|tv	       |EditText   |et       |
 |Button	    |btn	   |ImageButton|imgbtn
 |ImageView	|img	   |ListView   |lv
@@ -59,57 +59,57 @@ public class MyClass {
 |ScrollView	|sv  	   |FrameLayout	|fl	
 
 ``` java
-<!-- ���Ǳ������ı��� -->
+<!-- 这是标题栏的标题 -->
 <TextView
     android:id="@+id/txt_header_title"
     ... />
 
-<!-- ���ǵ�¼��ť -->
+<!-- 这是登录按钮 -->
 <Button
     android:id="@+id/btn_login"
     ... />
 ```
-#####6.��Դ�ļ�������
-1. layout����
-�������_ ��Χ_���ܣ���Χ��ѡ��ֻ������ȷ����ķ�Χ�ڲ���Ҫ���ϡ�
-- activity_��Χ_���ܣ�ΪActivity��������ʽ
-- fragment_��Χ_���ܣ�ΪFragment��������ʽ
-- dialog_��Χ_���ܣ�ΪDialog��������ʽ
-- item_list_��Χ_���ܣ�ΪListView��item������ʽ
-2.  strings������
-����_ ��Χ_���ܣ���Χ��ѡ��
-- ҳ����⣬������ʽΪ��title_ҳ��
-- ��ť���֣�������ʽΪ��btn_��ť�¼�
-- ��ǩ���֣�������ʽΪ��label_��ǩ����
-- ѡ����֣�������ʽΪ��tab_ѡ�����
-- ��Ϣ�����֣�������ʽΪ��toast_��Ϣ
-- �༭�����ʾ���֣�������ʽΪ��hint_��ʾ��Ϣ
-- ͼƬ���������֣�������ʽΪ��desc_ͼƬ����
-- �Ի�������֣�������ʽΪ��dialog_����
-- menu��item���֣�������ʽΪ��action_����
-3.  colors������
-ǰ׺_ �ؼ� _ ��Χ _ ��׺���ؼ�����Χ����׺��ѡ�����ؼ��ͷ�Χ����Ҫ��һ����
-- ������ɫ������bgǰ׺
-- �ı���ɫ������textǰ׺
-- �ָ�����ɫ������divǰ׺
-- Ĭ��״̬����ɫ������normal��׺
-- ����ʱ����ɫ������pressed��׺
-- ѡ��ʱ����ɫ������selected��׺
-- ������ʱ����ɫ������disable��׺
-4. drawable������
-ǰ׺_ �ؼ�_ ��Χ_��׺���ؼ�����Χ����׺��ѡ�����ؼ��ͷ�Χ����Ҫ��һ����
-- ͼ���࣬����icǰ׺
-- �����࣬����bgǰ׺
-- �ָ��࣬����divǰ׺
-- Ĭ���࣬����defǰ׺
-- Ĭ��״̬������normal��׺
-- ����ʱ��״̬������pressed��׺
-- ѡ��ʱ��״̬������selected��׺
-- ������ʱ��״̬������disable��׺
-- ����״̬������selector��׺��һ��ΪListView��selector��ť��selector��
-#### Javaע��
-#####1. �ļ�ͷע��
-�ļ�����ͳһ���Ӱ�Ȩ����������� package �� import ��䣨������֮���ÿ��зָ�������������ӿ��������� Javadoc ��ע��˵�����ӿڵ����á�
+##### 6.资源文件命名字
+1. layout命名
+组件类型_ 范围_功能，范围可选，只在有明确定义的范围内才需要加上。
+- activity_范围_功能，为Activity的命名格式
+- fragment_范围_功能，为Fragment的命名格式
+- dialog_范围_功能，为Dialog的命名格式
+- item_list_范围_功能，为ListView的item命名格式
+2. strings的命名
+类型_ 范围_功能，范围可选。
+- 页面标题，命名格式为：title_页面
+- 按钮文字，命名格式为：btn_按钮事件
+- 标签文字，命名格式为：label_标签文字
+- 选项卡文字，命名格式为：tab_选项卡文字
+- 消息框文字，命名格式为：toast_消息
+- 编辑框的提示文字，命名格式为：hint_提示信息
+- 图片的描述文字，命名格式为：desc_图片文字
+- 对话框的文字，命名格式为：dialog_文字
+- menu的item文字，命名格式为：action_文字
+3. colors的命名
+前缀_ 控件 _ 范围 _ 后缀，控件、范围、后缀可选，但控件和范围至少要有一个。
+- 背景颜色，添加bg前缀
+- 文本颜色，添加text前缀
+- 分割线颜色，添加div前缀
+- 默认状态的颜色，添加normal后缀
+- 按下时的颜色，添加pressed后缀
+- 选中时的颜色，添加selected后缀
+- 不可用时的颜色，添加disable后缀
+4. drawable的命名
+前缀_ 控件_ 范围_后缀，控件、范围、后缀可选，但控件和范围至少要有一个。
+- 图标类，添加ic前缀
+- 背景类，添加bg前缀
+- 分隔类，添加div前缀
+- 默认类，添加def前缀
+- 默认状态，添加normal后缀
+- 按下时的状态，添加pressed后缀
+- 选中时的状态，添加selected后缀
+- 不可用时的状态，添加disable后缀
+- 多种状态，添加selector后缀（一般为ListView的selector或按钮的selector）
+#### Java注释
+##### 1.文件头注释
+文件顶部统一添加版权声明，其后是 package 和 import 语句（各个块之间用空行分隔），最后是类或接口声明。在 Javadoc 备注中说明类或接口的作用。
 ``` java
 /*
  * Copyright (C) 2015 The Android Open Source Project
@@ -131,15 +131,15 @@ public class Foo {
     ...
 }
 ```
-#####2. ��ͽӿ�ע��
-��д��ÿ�������Ҫ�Ĺ���������������� Javadoc ��ע��������һ�仰˵����򷽷�����;����ʽӦ�Ե����˳������Զ��ʿ�ͷ��
+##### 2.类和接口注释
+编写的每个类和重要的公开方法都必须包含 Javadoc 备注，至少用一句话说明类或方法的用途。句式应以第三人称描述性动词开头。
 ``` java
 /** Returns the correctly rounded positive square root of a double value. */
 static double sqrt(double a) {
     ...
 }
 
-��
+或
 /**
  * Constructs a new String by converting the specified array of
  * bytes using the platform's default character encoding.
@@ -148,59 +148,59 @@ public String(byte[] bytes) {
     ...
 }
 ```
-#####4. ����ע��
-���漸�ַ���������������javadocע�ͣ�˵���÷�������;�Ͳ���˵�����Լ�����ֵ��˵����
-- �ӿ��ж�������з���
-- ���������Զ���ĳ��󷽷�
-- ��������Զ��幫�÷���
-- ������Ĺ��÷���
+##### 4.方法注释
+下面几种方法，都必须添加javadoc注释，说明该方法的用途和参数说明，以及返回值的说明。
+- 接口中定义的所有方法
+- 抽象类中自定义的抽象方法
+- 抽象父类的自定义公用方法
+- 工具类的公用方法
  
-#####3.ʹ�� TODO ��ע
-Ϊ����ʹ�� TODO ��ע�Ƕ��ڵ���ʱ�������������˵�㹻�õ�����������
+#####3.使用 TODO 备注
+为代码使用 TODO 备注是短期的临时解决方案，或者说足够好但并不完美。
 ``` java
  // TODO: Remove this code after the UrlTable2 has been checked in.
 ```
-#### Java ��ʽ����
+#### Java 样式规则
 
-#####1. һ��������಻Ҫ����40�д��롣
-#####2.ʹ��4���ո��������飬����Ҫʹ���Ʊ�����
-#####3. ��һ������ʽ�޷�������һ����ʱ���ɻ�����ʾ�������������8���ո�������
+#####1. 一个方法最多不要超过40行代码。
+#####2.使用4个空格来缩进块，而不要使用制表符。
+#####3. 当一个表达式无法容纳在一行内时，可换行显示，另起的新行用8个空格缩进。
 
 ``` java
 Instrument i =
         someLongExpression(that, wouldNotFit, on, one, line);
 ``` 
-#####4. �п�����Ϊ100�����ø�ʽ��ʱ�Զ����е��п�λ�á�
-#####5. �����Ų�Ҫ����һ�У�����ǰ��Ĵ���ͬһ�С����ң���������ǰ��Ĵ���֮����һ���ո������
+##### 4.行宽设置为100，设置格式化时自动断行到行宽位置。
+##### 5.花括号不要单独一行，和它前面的代码同一行。而且，花括号与前面的代码之间用一个空格隔开。
 ``` java
-public void method() { // ��ȷд��
+public void method() { // 正确写法
 
 } 
 
 public void method()
-{ // ����д��
+{ // 错误写法
 }  
 
-public void method(){ // ����д��
+public void method(){ // 错误写法
 
 } 
 ``` 
-#####6. ���е�ʹ��
+##### 6.空行的使用
 
-���߼���صĴ�����ÿ��и���������߿ɶ��ԡ�����Ҳֻ��һ�У���Ҫ�ն��С��������������һ�����У�
-- ��������֮��
-- �����ڵ������߼���֮��
-- �����ڵľֲ������ͷ����ĵ�һ���߼����֮��
-- �����ͱ���֮��
-��������С�ֲ���������������������������ߴ���Ŀɶ��ԺͿ�ά���ԣ������ͳ����Ŀ����ԡ�ÿ������Ӧ���ڰ�����������ʹ�ó��ϵ����ڲ�Ŀ��н���������
-#####7. һ������һ����������Ҫһ�������������������������дע�͡�
+将逻辑相关的代码段用空行隔开，以提高可读性。空行也只空一行，不要空多行。在以下情况需用一个空行：
+- 两个方法之间
+- 方法内的两个逻辑段之间
+- 方法内的局部变量和方法的第一条逻辑语句之间
+- 常量和变量之间
+尽可能缩小局部变量的作用域。这样做有助于提高代码的可读性和可维护性，并降低出错的可能性。每个变量应该在包含变量所有使用场合的最内层的块中进行声明。
+#####7. 一行声明一个变量，不要一行声明多个变量，这样有利于写注释。
 ``` java
-private String param1; // ����1
-private String param2; // ����2
+private String param1; // 参数1
+private String param2; // 参数2
 ```
-#####8. ��ɫֵͳһ��colors.xml�ж��壬Ȼ���ڴ���Ͳ����ļ������á����⣬��Ҫ�ڴ���Ͳ����ļ�������ϵͳ����ɫ������͸����
+##### 8.颜色值统一在colors.xml中定义，然后在代码和布局文件中引用。另外，不要在代码和布局文件中引用系统的颜色，除了透明。
 
-#####9. ���ִ�С�ĵ�λͳһ��sp��Ԫ�ش�С�ĵ�λͳһ��dp��
+##### 9.文字大小的单位统一用sp，元素大小的单位统一用dp。
 
-#####10. Ӧ���е��ַ���ͳһ��strings.xml�ж��壬Ȼ���ڴ���Ͳ����ļ������á�
+##### 10.应用中的字符串统一在strings.xml中定义，然后在代码和布局文件中引用。
 
