@@ -1,22 +1,46 @@
-### Android 开发规范文档
+### Android开发规范文档
 ### 结构规范
-
+#### 目录结构
+- app/manifests AndroidManifest.xml配置文件目录
+- app/java 源码目录
+- app/res 资源文件目录
+- Gradle Scripts gradle编译相关的脚本
+|常见的命名划分
+| 命名格式          |作用                   |
+| :------------    | :------------------- | 
+|com.xx.app_name.activities(或com.xx.app_name.activity)	|存放app所有的Activity
+|com.xx.app_name.service	|存放app所有的Service
+|com.xx.app_name.receiver	|存放app所有的BroadcastReceiver
+|com.xx.app_name.provider	|存放app所有的ContentProvider
+|com.xx.app_name.fragment	|存放app所有的Fragment
+|com.xx.app_name.dialog	    |存放app所有的Dialog
+|com.xx.app_name.base	    |存放app一些共有的基础模块，诸如BaseActivity、BaseContentProvider、BaseService，BaseFragment等
+|com.xx.app_name.utils	    |存放app的工具类,诸如格式化日期的DateFormatUtils，处理字符串的StringUtils等
+|com.xx.app_name.bean(或com.xx.app_name.unity)	              |存放app自定义的实体类
+|com.xx.app_name.db	 |存放app数据库操作相关的类
+|com.xx.app_name.view |存放app自定义的控件
+|com.xx.app_name.adapter|	存放app所有的适配器类
 ### 代码规范
 #### Java命名规范
 ##### 1.包命名
 域名反写+项目名称+模块名称，全部单词用小写字母。
-``` java
-me.keeganlee.kandroid.model
-```
-##### 2.类和接口命名
+- 一级包名为com
+- 二级包名为xx（可以是公司或则个人的随便）
+- 三级包名应用的英文名app_name
+- 四级包名为模块名或层级名
+
+#####2.类和接口命名
 使用大驼峰规则，用名词或名词词组命名，每个单词的首字母大写。
-- activity类，命名以Activity为后缀，如：LoginActivity
-- fragment类，命名以Fragment为后缀，如:ShareDialogFragment
-- service类，命名以Service为后缀，如：DownloadService
-- adapter类，命名以Adapter为后缀，如：CouponListAdapter
-- 工具类，命名以Util为后缀，如：EncryptUtil
-- 模型类，命名以BO为后缀，如：CouponBO
-- 接口实现类，命名以Impl为后缀，如：ApiImpl
+|类     | 命名格式      |示例              |
+|:------|:-------------|:----------------| 
+|activity类| 以Activity为后缀|LoginActivity
+|fragment类|以Fragment为后缀|ShareDialogFragment
+|service类 |以Service为后缀|DownloadService
+|adapter类 |以Adapter为后缀|CouponListAdapter
+|基础功能类 |Base+XX父类名  |BaseActivity，BaseFragment
+|工具类     |以Util为后缀|EncryptUtil
+|模型类     |以bean为后缀|UserBean
+|接口实现类 |以Impl为后缀|ApiImpl
 ##### 3.方法命名
 使用小驼峰规则，用动词命名，第一个单词的首字母小写，其他单词的首字母大写。
 - 初始化方法，命名以init开头，例：initView
@@ -32,6 +56,7 @@ me.keeganlee.kandroid.model
 - 静态字段的名称以 s 开头。
 - 其他字段以小写字母开头。
 - 公开静态` final `字段（常量）为全部大写并用下划线连接 (ALL_CAPS_WITH_UNDERSCORES)。
+>注意，所有常量都必须是static final成员，但并不是所有的static final成员都是常量。
 ``` java
 public class MyClass {
     public static final int SOME_CONSTANT = 42;
@@ -42,13 +67,11 @@ public class MyClass {
     protected int mProtected;
 }
 ```
-##### 5.控件id命名
-控件缩写 _ 范围 _ 意义，范围可选，只在有明确定义的范围内才需要加上。
-
-控件缩写
+#####5.控件id命名
+布局文件中的控件命名尽量使用控件缩写做前缀。控件缩写 _ 范围 _ 意义，范围可选，
 
 | 控件       |缩写      |控件        |缩写      |
-|:--------  |:--------| :--------  |
+| :-------- | --------:| :-------- |
 |TextView	|tv	       |EditText   |et       |
 |Button	    |btn	   |ImageButton|imgbtn
 |ImageView	|img	   |ListView   |lv
@@ -155,16 +178,16 @@ public String(byte[] bytes) {
 - 抽象父类的自定义公用方法
 - 工具类的公用方法
  
-#####3.使用 TODO 备注
+##### 3.使用 TODO 备注
 为代码使用 TODO 备注是短期的临时解决方案，或者说足够好但并不完美。
 ``` java
  // TODO: Remove this code after the UrlTable2 has been checked in.
 ```
-#### Java 样式规则
+#### Java 编码规范
 
-#####1. 一个方法最多不要超过40行代码。
-#####2.使用4个空格来缩进块，而不要使用制表符。
-#####3. 当一个表达式无法容纳在一行内时，可换行显示，另起的新行用8个空格缩进。
+##### 1. 一个方法最多不要超过40行代码。
+##### 2.使用4个空格来缩进块，而不要使用制表符。
+##### 3. 当一个表达式无法容纳在一行内时，可换行显示，另起的新行用8个空格缩进。
 
 ``` java
 Instrument i =
@@ -193,7 +216,7 @@ public void method(){ // 错误写法
 - 方法内的局部变量和方法的第一条逻辑语句之间
 - 常量和变量之间
 尽可能缩小局部变量的作用域。这样做有助于提高代码的可读性和可维护性，并降低出错的可能性。每个变量应该在包含变量所有使用场合的最内层的块中进行声明。
-#####7. 一行声明一个变量，不要一行声明多个变量，这样有利于写注释。
+##### 7.一行声明一个变量，不要一行声明多个变量，这样有利于写注释。
 ``` java
 private String param1; // 参数1
 private String param2; // 参数2
@@ -203,4 +226,8 @@ private String param2; // 参数2
 ##### 9.文字大小的单位统一用sp，元素大小的单位统一用dp。
 
 ##### 10.应用中的字符串统一在strings.xml中定义，然后在代码和布局文件中引用。
+##### 11.switch语句中，必须包含default语句。
+
+
+
 
